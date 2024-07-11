@@ -5,7 +5,6 @@ const emailService = require('../services/emailService');
 
 referalController.post('/', async (req, res) => {
     const { name, email, referedBy, createdAt } = req.body;
-
     if (!name || !email || !referedBy) {
         return res.status(400).json({ error: 'All fields are required' });
     }
@@ -20,7 +19,7 @@ referalController.post('/', async (req, res) => {
         await newReferal.save();
 
         await emailService.sendReferalEmail(newReferal);
-        res.status(201).json({"Message":"Email Sent Successfull",newReferal});
+        res.status(201).json({ "Message": "Email Sent Successfull", newReferal });
     } catch (error) {
         console.log(error);
     }
